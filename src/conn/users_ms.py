@@ -2,7 +2,7 @@ import requests
 import json
 import strawberry
 from src.models.users import Driver_model
-from src.utils.response_transformer import jsonToDrivers, jsonToDriver
+from src.utils.response_transformer import jsonToDrivers, jsonToDriver, jsonToString
 
 BASE_URL = 'http://127.0.0.1:8000'
 
@@ -36,5 +36,6 @@ def update_driver(id, driver):
 # Example DELETE request
 def delete_driver(id):
     response = requests.delete(f'{BASE_URL}/driver/{id}')
-    return response.status_code  # Returns HTTP status code
+    message = jsonToString(response.content)
+    return message
 

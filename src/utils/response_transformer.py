@@ -3,6 +3,9 @@ from typing import List
 
 from src.models.users import Driver_model, Passenger_model
 
+def jsonToString(content)->str:
+    return json.loads(content.decode('utf-8'))
+
 def jsonToDriver(content)->Driver_model:
     i = json.loads(content.decode('utf-8'))
     driver =  Driver_model(

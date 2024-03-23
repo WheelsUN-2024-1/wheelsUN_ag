@@ -24,9 +24,7 @@ class Mutation:
     @strawberry.mutation
     def updateDriver(self, info, id:int, driver:Driver_patch)->Driver_model:
         return update_driver(id, driver)
-    """
-    #TODO
+    
     @strawberry.mutation
-    def deleteDriver(self, info, driver:Driver)->str:
-        #return delete_data(driver)
-        return "deleteDriver succesful" """
+    def deleteDriver(self, info, id:int)->str:
+        return delete_driver(id)
