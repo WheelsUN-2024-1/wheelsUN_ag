@@ -1,0 +1,8 @@
+pip install "fastapi[all]"
+pip install 'strawberry-graphql[fastapi]'
+pip install fastapi[all] requests
+
+pip install cryptography ????
+
+
+uvicorn src.main:app --host 0.0.0.0 --port 8100 --reload
