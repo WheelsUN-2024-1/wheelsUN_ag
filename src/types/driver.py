@@ -5,7 +5,7 @@ from src.models.users import Driver_model, Driver_input, Driver_patch
 from strawberry.types import Info
 
 @strawberry.type
-class Query:
+class DriverQuery:
     #allDrivers: typing.List[Driver_model] = strawberry.field(resolver= get_data)
     @strawberry.field
     def allDrivers(self, info: Info)->typing.List[Driver_model]:
@@ -16,7 +16,7 @@ class Query:
         return get_driver_by_id(id)
     
 @strawberry.type
-class Mutation:
+class DriverMutation:
     @strawberry.mutation
     def createDriver(self, info: Info, driver:Driver_input)->Driver_model:        
         return create_driver(driver)

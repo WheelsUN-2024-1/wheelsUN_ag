@@ -41,3 +41,37 @@ def jsonToDrivers(content)->List[Driver_model]:
             )
         drivers.append(driver)
     return drivers
+
+def jsonToPassenger(content)->Passenger_model:
+    i = json.loads(content.decode('utf-8'))
+    passenger =  Passenger_model(
+        userAddress=i["userAddress"],
+        userAge=i["userAge"],
+        userCity=i["userCity"],
+        userCountry=i["userCountry"],
+        userEmail=i["userEmail"],
+        userIdNumber=i["userIdNumber"],
+        userName=i["userName"],
+        userPhone=i["userPhone"],
+        userPostalCode=i["userPostalCode"],
+        )
+    
+    return passenger
+
+def jsonToPassengers(content)->List[Passenger_model]:
+    data = json.loads(content.decode('utf-8'))
+    passengers = []
+    for i in data:
+        passenger =  Passenger_model(
+            userAddress=i["userAddress"],
+            userAge=i["userAge"],
+            userCity=i["userCity"],
+            userCountry=i["userCountry"],
+            userEmail=i["userEmail"],
+            userIdNumber=i["userIdNumber"],
+            userName=i["userName"],
+            userPhone=i["userPhone"],
+            userPostalCode=i["userPostalCode"],
+            )
+        passengers.append(passenger)
+    return passengers
