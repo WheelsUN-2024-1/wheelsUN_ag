@@ -2,6 +2,7 @@ import json
 from typing import List
 
 from src.models.users import Driver_model, Passenger_model
+from src.models.trip import Trip
 
 def jsonToString(content)->str:
     return json.loads(content.decode('utf-8'))
@@ -75,3 +76,36 @@ def jsonToPassengers(content)->List[Passenger_model]:
             )
         passengers.append(passenger)
     return passengers
+
+
+
+def jsonToTrips(content)->List[Trip]:
+    data = json.loads(content.decode('utf-8'))
+    trips = []
+    for i in data:
+        print(i)
+        trip =  Trip(
+            id=i["_id"],
+            route=i["route"],
+            price=i["price"],
+            vehicleId=i["vehicleId"],
+            transactionIds=i["transactionIds"],
+            currentState=i["currentState"],
+            )
+        trips.append(trip)
+    return trips
+
+
+def jsonToTrip(content)->List[Trip]:
+    i = json.loads(content.decode('utf-8'))   
+        
+    trip =  Trip(
+        id=i["_id"],
+        route=i["route"],
+        price=i["price"],
+        vehicleId=i["vehicleId"],
+        transactionIds=i["transactionIds"],
+        currentState=i["currentState"],
+        )
+
+    return trip
