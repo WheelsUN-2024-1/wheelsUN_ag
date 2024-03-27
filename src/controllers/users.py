@@ -6,12 +6,12 @@ from strawberry.asgi import GraphQL
 
 users_router = APIRouter()
 
-#hwew we combine all querys
+#here we combine all querys
 @strawberry.type
 class Query(DriverQuery, PassengerQuery):
     ...
 
-#hwew we combine all mutations
+#here we combine all mutations
 @strawberry.type
 class Mutation(DriverMutation, PassengerMutation):
     ...

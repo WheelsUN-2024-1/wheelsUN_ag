@@ -1,6 +1,6 @@
 import strawberry
 import typing
-from src.conn.users_ms import get_passenger, get_passenger_by_id, create_passenger, update_passenger, delete_passenger
+from src.conn.users_ms import get_passengers, get_passenger_by_id, create_passenger, update_passenger, delete_passenger
 from src.models.users import Passenger_model, Passenger_input, Passenger_patch
 from strawberry.types import Info
 
@@ -8,7 +8,7 @@ from strawberry.types import Info
 class PassengerQuery:
     @strawberry.field
     def allPassengers(self, info: Info)->typing.List[Passenger_model]:
-        return get_passenger()
+        return get_passengers()
    
     @strawberry.field
     def passengerById(self, info: Info, id:int)->Passenger_model:

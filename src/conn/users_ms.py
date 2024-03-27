@@ -1,11 +1,11 @@
 import requests
 import strawberry
-from src.utils.response_transformer import jsonToDrivers, jsonToDriver, jsonToPassengers, jsonToPassenger, jsonToString
+from src.utils.response_transformer import jsonToDrivers, jsonToDriver, jsonToPassengers, jsonToPassenger, jsonToString, jsonToVehicles, jsonToVehicle
 
 BASE_URL = 'http://127.0.0.1:8000'
 
 ##DRIVER
-def get_driver():
+def get_drivers():
     response = requests.get(f'{BASE_URL}/driver')
     drivers = jsonToDrivers(response.content)
     return drivers
@@ -35,7 +35,7 @@ def delete_driver(id):
     return message
 
 ##PASSENGER
-def get_passenger():
+def get_passengers():
     response = requests.get(f'{BASE_URL}/passenger')
     passengers = jsonToPassengers(response.content)
     return passengers
@@ -61,5 +61,40 @@ def update_passenger(id, passenger):
 
 def delete_passenger(id):
     response = requests.delete(f'{BASE_URL}/passenger/{id}')
+    message = jsonToString(response.content)
+    return message
+
+##VEHICLE
+def get_vehicles():
+    response = requests.get(f'{BASE_URL}/vehicle')
+    vehicles = jsonToVehicles(response.content)
+    return vehicles
+
+def get_vehicle_by_id(id):
+    response = requests.get(f'{BASE_URL}/vehicle/ownerId/{id}')
+    vehicle = jsonToVehicle(response.content)
+    return vehicle
+
+def get_vehicle_by_plate(plate):
+    response = requests.get(f'{BASE_URL}/vehicle/plate/{plate}')
+    vehicle = jsonToVehicle(response.content)
+    return vehicle
+
+def create_vehicle(vehicle):
+    vehicle_dict = strawberry.asdict(vehicle)
+    response = requests.post(f'{BASE_URL}/vehicle', json=vehicle_dict)
+    vehicle = jsonToVehicle(response.content)
+    return vehicle
+
+def update_vehicle(plate, vehicle):
+    vehicle_dict = strawberry.asdict(vehicle)
+    filtered_dict = {key: value for key, value in vehicle_dict.items() if value is not None}
+    response = requests.patch(f'{BASE_URL}/vehicle/{plate}', json=filtered_dict)
+    #print(response.content)
+    vehicle = jsonToVehicle(response.content)
+    return vehicle
+
+def delete_vehicle(plate):
+    response = requests.delete(f'{BASE_URL}/vehicle/{plate}')
     message = jsonToString(response.content)
     return message
