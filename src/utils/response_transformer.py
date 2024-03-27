@@ -4,6 +4,8 @@ from typing import List
 from src.models.users import Driver_model, Passenger_model
 from src.models.vehicle import Vehicle_model
 from src.models.trip import Trip
+from src.models.transactions import Transaction_Response
+from src.models.transactions import CreditCard_Response
 
 def jsonToString(content)->str:
     return json.loads(content.decode('utf-8'))
@@ -125,7 +127,7 @@ def jsonToTrips(content)->List[Trip]:
     return trips
 
 
-def jsonToTrip(content)->List[Trip]:
+def jsonToTrip(content)->Trip:
     i = json.loads(content.decode('utf-8'))   
         
     trip =  Trip(
@@ -138,3 +140,43 @@ def jsonToTrip(content)->List[Trip]:
         )
 
     return trip
+
+def jsonToTransaction(content)->Transaction_Response:
+    i = json.loads(content.decode('utf-8'))   
+        
+    transaction =  Transaction_Response(
+        ID=i["ID"],
+        CreatedAt=i["CreatedAt"],
+        UpdatedAt=i["UpdatedAt"],
+        DeletedAt=i["DeletedAt"],
+        referenceCode=i["referenceCode"],
+        description=i["description"],
+        value=i["value"],
+        paymentMethods=i["paymentMethods"],
+        state=i["state"],
+        TransactionIdPay=i["transactionIdPay"],
+        orderId=i["orderId"],
+        tripId=i["tripId"],
+        creditCardId=i["creditCardId"]
+
+        )
+
+    return transaction
+
+def jsonToCreditCard(content)->CreditCard_Response:
+    i = json.loads(content.decode('utf-8'))   
+        
+    creditcard =  CreditCard_Response(
+        ID=i["ID"],
+        CreatedAt=i["CreatedAt"],
+        UpdatedAt=i["UpdatedAt"],
+        DeletedAt=i["DeletedAt"],
+        creditCardId=i["creditCardId"],
+        userId=i["userId"],
+        number=i["number"],
+        name=i["name"],
+        securityCode=i["securityCode"],
+        expirationDate=i["expirationDate"],
+        )
+
+    return creditcard
