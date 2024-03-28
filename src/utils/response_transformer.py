@@ -137,6 +137,7 @@ def jsonToTrip(content)->Trip:
         vehicleId=i["vehicleId"],
         transactionIds=i["transactionIds"],
         currentState=i["currentState"],
+        waypoints=i["waypoints"]
         )
 
     return trip

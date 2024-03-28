@@ -1,5 +1,5 @@
 import strawberry
-from typing import List, Any, NewType
+from typing import List, Any, NewType, Optional
 
 
 
@@ -20,6 +20,7 @@ class Trip:
     vehicleId: int
     transactionIds: List[int]
     currentState: int
+    waypoints: List[int]
 
 
 @strawberry.input
@@ -29,3 +30,21 @@ class TripInput:
     price: int
     vehicleId: int
     currentState: int
+
+@strawberry.input
+class TripPassenger:
+    transactionId: int
+    waypoint: str
+
+@strawberry.input
+class TransactionID:
+    transactionId: int
+
+
+@strawberry.input
+class TripPatch:
+    price: Optional[int] = None
+    vehicleId: Optional[int] = None
+    currentState: Optional[int] = None
+    
+    
