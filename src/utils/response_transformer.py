@@ -125,7 +125,7 @@ def jsonToTrips(content)->List[Trip]:
     return trips
 
 
-def jsonToTrip(content)->List[Trip]:
+def jsonToTrip(content)->Trip:
     i = json.loads(content.decode('utf-8'))   
         
     trip =  Trip(
@@ -135,6 +135,7 @@ def jsonToTrip(content)->List[Trip]:
         vehicleId=i["vehicleId"],
         transactionIds=i["transactionIds"],
         currentState=i["currentState"],
+        waypoints=i["waypoints"]
         )
 
     return trip

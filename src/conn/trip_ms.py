@@ -27,29 +27,31 @@ def create_trip(trip):
 def update_trip(id, trip):
     trip_dict = strawberry.asdict(trip)
     filtered_dict = {key: value for key, value in trip_dict.items() if value is not None}
-    response = requests.put(f'{BASE_URL}/trip/{id}', json=filtered_dict)
+    response = requests.patch(f'{BASE_URL}/trip/{id}', json=filtered_dict)
     #print(response.content)
-    return response
+    trip = jsonToTrip(response.content)
+    return trip
 
 # Example PUT request
 def add_passg_trip(id, trip):
     trip_dict = strawberry.asdict(trip)
     filtered_dict = {key: value for key, value in trip_dict.items() if value is not None}
-    response = requests.put(f'{BASE_URL}/trip/add/{id}', json=filtered_dict)
-    #print(response.content)
-    return response
+    response = requests.patch(f'{BASE_URL}/trip/add/{id}', json=filtered_dict)
+    trip = jsonToTrip(response.content)
+    return trip
 
 # Example PUT request
 def remove_passg_trip(id, trip):
     trip_dict = strawberry.asdict(trip)
     filtered_dict = {key: value for key, value in trip_dict.items() if value is not None}
-    response = requests.put(f'{BASE_URL}/trip/remove/{id}', json=filtered_dict)
-    #print(response.content)
-    return response
+    response = requests.patch(f'{BASE_URL}/trip/remove/{id}', json=filtered_dict)
+    trip = jsonToTrip(response.content)
+    return trip
 
 
 # Example DELETE request
 def delete_trip(id):
     response = requests.delete(f'{BASE_URL}/trip/{id}')
-    return response
+    trip = jsonToTrip(response.content)
+    return trip
 
