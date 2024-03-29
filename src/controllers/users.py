@@ -2,18 +2,19 @@ import strawberry
 from fastapi import APIRouter
 from src.types.driver import DriverQuery, DriverMutation
 from src.types.passenger import PassengerQuery, PassengerMutation
+from src.types.vehicle import VehicleQuery, VehicleMutation
 from strawberry.asgi import GraphQL
 
 users_router = APIRouter()
 
 #here we combine all querys
 @strawberry.type
-class Query(DriverQuery, PassengerQuery):
+class Query(DriverQuery, PassengerQuery, VehicleQuery):
     ...
 
 #here we combine all mutations
 @strawberry.type
-class Mutation(DriverMutation, PassengerMutation):
+class Mutation(DriverMutation, PassengerMutation, VehicleMutation):
     ...
 
 schema = strawberry.Schema(Query, Mutation)

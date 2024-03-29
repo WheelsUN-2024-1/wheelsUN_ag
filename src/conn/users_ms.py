@@ -72,8 +72,8 @@ def get_vehicles():
 
 def get_vehicle_by_id(id):
     response = requests.get(f'{BASE_URL}/vehicle/ownerId/{id}')
-    vehicle = jsonToVehicle(response.content)
-    return vehicle
+    vehicles = jsonToVehicles(response.content)
+    return vehicles
 
 def get_vehicle_by_plate(plate):
     response = requests.get(f'{BASE_URL}/vehicle/plate/{plate}')
