@@ -3,10 +3,10 @@ from typing import Optional
 
 @strawberry.input
 class RegisterModel:
-   username: str
-   password: str
    firstName: str
    lastName:str
+   username: str
+   password: str
    role:str
 
 @strawberry.type
