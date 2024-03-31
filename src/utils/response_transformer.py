@@ -6,6 +6,8 @@ from src.models.vehicle import Vehicle_model
 from src.models.trip import Trip
 from src.models.transactions import Transaction_Response
 from src.models.transactions import CreditCard_Response
+from src.models.auth import RegisterResponse
+from src.models.auth import LoginResponse
 
 def jsonToString(content)->str:
     return json.loads(content.decode('utf-8'))
@@ -181,3 +183,23 @@ def jsonToCreditCard(content)->CreditCard_Response:
         )
 
     return creditcard
+
+def jsonToRegister(content)->RegisterResponse:
+    i = json.loads(content.decode('utf-8'))   
+        
+    register =  RegisterResponse(
+        token=i["token"],
+        message=i["message"]
+        )
+
+    return register
+
+def jsonToLogin(content)->LoginResponse:
+    i = json.loads(content.decode('utf-8'))   
+        
+    login =  LoginResponse(
+        token=i["token"],
+        message=i["message"]
+        )
+
+    return login
