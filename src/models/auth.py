@@ -7,11 +7,12 @@ class RegisterModel:
    password: str
    firstName: str
    lastName:str
+   role:str
 
 @strawberry.type
 class RegisterResponse:
-   # completar
-   response: str
+   token:str
+   message: str
 
 
 @strawberry.input
@@ -21,5 +22,5 @@ class LoginModel:
 
 @strawberry.type
 class LoginResponse:
-   # completar
-   response: str
+   token:str
+   message: str
