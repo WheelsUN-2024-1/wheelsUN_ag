@@ -1,25 +1,33 @@
-#!/usr/bin/env python
-import pika
-import time
+import asyncio
+import aio_pika
 
-def pop_notification():
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost'))
-    channel = connection.channel()
-
-    channel.queue_declare(queue='notification_queue', durable=True)
-    print(' [*] Waiting for messages. To exit press CTRL+C')
-
-
-    def callback(ch, method, properties, body):
-        print(f" [x] Received {body.decode()}")
-        time.sleep(3)
+async def on_message(message: aio_pika.IncomingMessage):
+    async with message.process():
+        print(f" [x] Received {message.body.decode()}")
+        # Simulate some processing
+        await asyncio.sleep(3)
         print(" [x] Done")
-        ch.basic_ack(delivery_tag=method.delivery_tag)
-        return body.decode()
 
+async def main():
+    # Connect to RabbitMQ
+    connection = await aio_pika.connect_robust(
+        host="localhost",
+        port=5672,  # default port for RabbitMQ
+    )
 
-    channel.basic_qos(prefetch_count=1)
-    channel.basic_consume(queue='notification_queue', on_message_callback=callback)
+    # Creating a channel
+    channel = await connection.channel()
 
-    channel.start_consuming()
+    # Declare the queue
+    queue = await channel.declare_queue(
+        "notification_queue", durable=True
+    )
+
+    # Setting up consumer
+    await queue.consume(on_message)
+
+    print(" [*] Waiting for messages. To exit press CTRL+C")
+    await asyncio.Future()  # Run forever
+
+if __name__ == "__main__":
+    asyncio.run(main())

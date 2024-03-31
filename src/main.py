@@ -5,7 +5,7 @@ from src.controllers.index import transaction_router
 
 #this is for test purposes---------------------------
 from src.messaging.new_task import push_notification
-from src.messaging.worker import pop_notification
+from src.messaging.worker import main
 #----------------------------------------------------
 
 app = FastAPI()
@@ -23,6 +23,6 @@ async def rabbitmq(message:str):
 
 @app.get("/rabbitmqget")
 async def rabbitmqget():
-    pop_notification()
+    await main()
     return "message pushed"
 #----------------------------------------------------
