@@ -17,8 +17,8 @@ app.include_router(transaction_router)
 #this is for test purposes---------------------------
 @app.get("/rabbitmq/{message}")
 async def rabbitmq(message:str):
-    #dict = {"message": message}
-    push_notification(message)
+    dict = {"message": message, "destination": "mail"}
+    push_notification(dict)
     return "message pushed"
 
 @app.get("/rabbitmqget")
