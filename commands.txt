@@ -2,11 +2,15 @@ pip install "fastapi[all]"
 pip install 'strawberry-graphql[fastapi]'
 pip install fastapi[all] requests
 pip install aio_pika
+pip install pika
 
 pip install cryptography ???? (this is not used in this ag)
 
 
 uvicorn src.main:app --host 0.0.0.0 --port 8100 --reload
+
+python -m uvicorn src.main:app --host 0.0.0.0 --port 8100 --reload
+
 
 rabbitmq image:
 docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
