@@ -2,6 +2,7 @@ import strawberry
 import typing 
 from typing import Optional
 from src.conn.trip_ms import get_trips, get_trip_by_id, create_trip, update_trip, add_passg_trip, remove_passg_trip, delete_trip
+from src.conn.join_trip import join_trip
 from src.models.trip import Trip, TripInput, TripPassenger, TransactionID, TripPatch
 from strawberry.types import Info
 
@@ -37,3 +38,7 @@ class TripMutation:
     @strawberry.mutation
     def removePassenger(self, info, id:str, tx_id: TransactionID)->Trip:
         return remove_passg_trip(id,tx_id)
+    
+    @strawberry.mutation
+    def joinTrip(self, info, id:str)->Trip:
+        return join_trip(id)

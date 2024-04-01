@@ -2,7 +2,6 @@
 import requests
 import json
 import strawberry
-from src.utils.response_transformer import jsonToTr
 from src.conn.trip_ms import get_trip_by_id, add_passg_trip
 from src.conn.transaction_ms import get_creditcard_by_id, create_transaction
 
@@ -12,11 +11,10 @@ TX_URL = 'http://127.0.0.1:3000'
 
 
 # Example GET request
-def join_trip():
+def join_trip(tripId):
     userId = 456
     vehicleId = 2
-    creditCardId = 5
-    tripId = 2
+    creditCardId = 1
 
     # get credit card
     responseCreditCard = get_creditcard_by_id(creditCardId)
@@ -25,7 +23,7 @@ def join_trip():
     responseTrip = get_trip_by_id(tripId)
 
 
-    json = {
+    json_tx = {
 
    "language": "es",
 
@@ -45,7 +43,7 @@ def join_trip():
 
          "accountId": "512321",
 
-         "referenceCode": "PRODUCT_TEST_2023-06-23T19:59:43.229Z",
+         "referenceCode": "julian",
 
          "description": "Payment test description",
 
@@ -67,7 +65,7 @@ def join_trip():
 
             "TX_TAX": {
 
-               "value": responseTrip.price*0.19,
+               "value": responseTrip.price*1,
 
                "currency": "COP"
 
@@ -202,7 +200,7 @@ def join_trip():
 
       "threeDomainSecure": {
 
-         "embedded": false,
+         "embedded": False,
 
          "eci": "01",
 
@@ -216,22 +214,24 @@ def join_trip():
 
    },
 
-   "test": true
+   "test": True
 
 }
-    tx_json = json.load(json)
+    
+    
 
     # create transaction
-    responseTransaction = create_transaction(tx_json)
+    responseTransaction = create_transaction(json_tx)
 
     tx_id = responseTransaction.referenceCode
 
     # create trip
 
-    json_trip = json.load({
+    json_trip = {
         "transactionId": tx_id,
         "waypoint": "Nuestro Bogotá"
-    })
+    }
+
     
     tripResponse = add_passg_trip(tripId, json_trip)
 

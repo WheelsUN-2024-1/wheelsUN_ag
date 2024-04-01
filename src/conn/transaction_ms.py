@@ -2,6 +2,7 @@ import requests
 import json
 import strawberry
 from src.utils.response_transformer import jsonToCreditCard, jsonToTransaction
+from src.models.transactions import Transaction_model
 
 BASE_URL = 'http://127.0.0.1:3000'
 
@@ -32,7 +33,11 @@ def get_transaction_by_id(id):
     return transaction
 
 def create_transaction(transaction):
-    transaction_dict = strawberry.asdict(transaction)
+    if type(transaction) == Transaction_model:
+        transaction_dict = strawberry.asdict(transaction)
+    else:
+        transaction_dict = transaction
     response = requests.post(f'{BASE_URL}/transaction/create', json=transaction_dict)
+    print(response.content)
     transaction = jsonToTransaction(response.content)
     return transaction
