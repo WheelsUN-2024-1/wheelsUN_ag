@@ -1,6 +1,7 @@
 pip install "fastapi[all]"
 pip install 'strawberry-graphql[fastapi]'
 pip install fastapi[all] requests
+pip install pika
 pip install aio_pika
 
 pip install cryptography ???? (this is not used in this ag)
