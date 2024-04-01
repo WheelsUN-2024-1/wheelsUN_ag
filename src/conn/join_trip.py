@@ -43,7 +43,7 @@ def join_trip(tripId):
 
          "accountId": "512321",
 
-         "referenceCode": "julian",
+         "referenceCode": "pruebita",
 
          "description": "Payment test description",
 

@@ -2,6 +2,7 @@ import requests
 import json
 import strawberry
 from src.utils.response_transformer import jsonToTrips, jsonToTrip
+from src.models.trip import TripPassenger
 
 BASE_URL = 'http://127.0.0.1:3002'
 
@@ -34,7 +35,10 @@ def update_trip(id, trip):
 
 # Example PUT request
 def add_passg_trip(id, trip):
-    trip_dict = strawberry.asdict(trip)
+    if type(trip) == TripPassenger:
+        trip_dict = strawberry.asdict(trip)
+    else:
+        trip_dict = trip
     filtered_dict = {key: value for key, value in trip_dict.items() if value is not None}
     response = requests.patch(f'{BASE_URL}/trip/add/{id}', json=filtered_dict)
     trip = jsonToTrip(response.content)
