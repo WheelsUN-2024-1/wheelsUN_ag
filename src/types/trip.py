@@ -5,6 +5,7 @@ from src.conn.trip_ms import get_trips, get_trip_by_id, create_trip, update_trip
 from src.conn.join_trip import join_trip
 from src.models.trip import Trip, TripInput, TripPassenger, TransactionID, TripPatch
 from strawberry.types import Info
+from src.messaging.new_task import push_notification
 
 @strawberry.type
 class TripQuery:
@@ -20,7 +21,12 @@ class TripQuery:
 @strawberry.type
 class TripMutation:
     @strawberry.mutation
-    def createTrip(self, info: Info, trip: TripInput)->Trip:        
+    def createTrip(self, info: Info, trip: TripInput)->Trip:     
+        dict = {"message": "El viaje ha sido creado", 
+                "inicio": trip.startingPoint,
+                "final": trip.endingPoint,
+                "precio": trip.price}
+        push_notification(dict)   
         return create_trip(trip)
     
     @strawberry.mutation
