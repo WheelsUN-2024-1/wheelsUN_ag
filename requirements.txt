@@ -1,0 +1,6 @@
+fastapi[all]
+strawberry-graphql[fastapi]
+cryptography
+requests
+aio_pika
+pika
