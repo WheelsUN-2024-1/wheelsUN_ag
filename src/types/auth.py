@@ -1,7 +1,7 @@
 import strawberry
 import typing
-from src.conn.auth_ms import register, login
-from src.models.auth import LoginModel, LoginResponse, RegisterModel, RegisterResponse
+from src.conn.auth_ms import register, login, logoutConn
+from src.models.auth import LoginModel, LoginResponse, RegisterModel, RegisterResponse, LogoutResponse
 from strawberry.types import Info
 
     
@@ -20,3 +20,7 @@ class AuthMutation :
     @strawberry.mutation
     def login(self, info: Info, loginM:LoginModel)->LoginResponse:        
         return login(loginM)
+    
+    @strawberry.mutation
+    def logout(self, info: Info, token:str)->LogoutResponse:        
+        return logoutConn(token)

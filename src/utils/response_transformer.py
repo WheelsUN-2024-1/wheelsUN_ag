@@ -6,8 +6,7 @@ from src.models.vehicle import Vehicle_model
 from src.models.trip import Trip
 from src.models.transactions import Transaction_Response
 from src.models.transactions import CreditCard_Response
-from src.models.auth import RegisterResponse
-from src.models.auth import LoginResponse
+from src.models.auth import RegisterResponse, LoginResponse, LogoutResponse
 
 def jsonToString(content)->str:
     return json.loads(content.decode('utf-8'))
@@ -15,6 +14,7 @@ def jsonToString(content)->str:
 def jsonToDriver(content)->Driver_model:
     i = json.loads(content.decode('utf-8'))
     driver =  Driver_model(
+        id=i["id"],
         userAddress=i["userAddress"],
         userAge=i["userAge"],
         userCity=i["userCity"],
@@ -34,6 +34,7 @@ def jsonToDrivers(content)->List[Driver_model]:
     drivers = []
     for i in data:
         driver =  Driver_model(
+            id=i["id"],
             userAddress=i["userAddress"],
             userAge=i["userAge"],
             userCity=i["userCity"],
@@ -51,6 +52,7 @@ def jsonToDrivers(content)->List[Driver_model]:
 def jsonToPassenger(content)->Passenger_model:
     i = json.loads(content.decode('utf-8'))
     passenger =  Passenger_model(
+        id=i["id"],
         userAddress=i["userAddress"],
         userAge=i["userAge"],
         userCity=i["userCity"],
@@ -69,6 +71,7 @@ def jsonToPassengers(content)->List[Passenger_model]:
     passengers = []
     for i in data:
         passenger =  Passenger_model(
+            id=i["id"],
             userAddress=i["userAddress"],
             userAge=i["userAge"],
             userCity=i["userCity"],
@@ -203,3 +206,12 @@ def jsonToLogin(content)->LoginResponse:
         )
 
     return login
+
+def jsonToLogout(content)->LogoutResponse:
+    i = json.loads(content.decode('utf-8'))   
+        
+    logout =  LogoutResponse(
+        message=i["message"]
+        )
+
+    return logout

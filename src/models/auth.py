@@ -3,11 +3,8 @@ from typing import Optional
 
 @strawberry.input
 class RegisterModel:
-   firstName: str
-   lastName:str
-   username: str
+   userId: str
    password: str
-   role:str
 
 @strawberry.type
 class RegisterResponse:
@@ -17,10 +14,14 @@ class RegisterResponse:
 
 @strawberry.input
 class LoginModel:
-   username: str
+   userId: str
    password: str
 
 @strawberry.type
 class LoginResponse:
    token:str
+   message: str
+
+@strawberry.type
+class LogoutResponse:
    message: str

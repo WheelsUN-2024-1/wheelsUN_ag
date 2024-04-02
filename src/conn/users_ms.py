@@ -15,6 +15,11 @@ def get_driver_by_id(id):
     driver = jsonToDriver(response.content)
     return driver
 
+def get_driver_by_email(email):
+    response = requests.get(f'{BASE_URL}/driver/byEmail/{email}')
+    driver = jsonToDriver(response.content)
+    return driver
+
 def create_driver(driver):
     driver_dict = strawberry.asdict(driver)
     response = requests.post(f'{BASE_URL}/driver', json=driver_dict)
@@ -42,6 +47,11 @@ def get_passengers():
 
 def get_passenger_by_id(id):
     response = requests.get(f'{BASE_URL}/passenger/{id}')
+    passenger = jsonToPassenger(response.content)
+    return passenger
+
+def get_passenger_by_email(email):
+    response = requests.get(f'{BASE_URL}/passenger/byEmail/{email}')
     passenger = jsonToPassenger(response.content)
     return passenger
 

@@ -2,6 +2,7 @@ import strawberry
 from typing import Optional
 @strawberry.type
 class Passenger_model:
+    id:str
     userIdNumber: int
     userName: str
     userAge: int
