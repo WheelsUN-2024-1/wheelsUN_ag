@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  fastapi:
+    image: image-wheelsun_ag
+    build: .
+    container_name: wheelsUN_ag
+    ports:
+      - "8100:8100" #this makes so the comms that arrive to 8000 port of my host machine goes to the 8000 port of the container
+    volumes:
+      - ./:/app
