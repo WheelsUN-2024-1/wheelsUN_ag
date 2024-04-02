@@ -24,4 +24,4 @@ class Mutation(DriverMutation, PassengerMutation, VehicleMutation, Authenticatio
 schema = strawberry.Schema(Query, Mutation)
 graphql_app = GraphQL(schema)
 
-users_router.add_route("/graphql", graphql_app)
+users_router.add_route("/user", graphql_app)
