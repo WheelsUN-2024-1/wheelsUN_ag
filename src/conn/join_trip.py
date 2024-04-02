@@ -4,7 +4,8 @@ import json
 import strawberry
 from src.conn.trip_ms import get_trip_by_id, add_passg_trip
 from src.conn.transaction_ms import get_creditcard_by_id, create_transaction
-
+from src.utils.referenceCodeGenerator import generateString
+from src.wheelsUN_mq.new_task import push_notification
 
 TRIP_URL = 'http://127.0.0.1:3002'
 TX_URL = 'http://127.0.0.1:3000'
@@ -15,7 +16,7 @@ def join_trip(tripId):
     userId = 456
     vehicleId = 2
     creditCardId = 1
-
+    referenceCodeGenerated = generateString()
     # get credit card
     responseCreditCard = get_creditcard_by_id(creditCardId)
 
@@ -43,7 +44,7 @@ def join_trip(tripId):
 
          "accountId": "512321",
 
-         "referenceCode": "pruebita",
+         "referenceCode": referenceCodeGenerated,
 
          "description": "Payment test description",
 
@@ -222,7 +223,12 @@ def join_trip(tripId):
 
     # create transaction
     responseTransaction = create_transaction(json_tx)
-
+    dict = {"message": "La transaccion ha sido creada", 
+                "referenceCode":responseTransaction.referenceCode,
+                "price": responseTransaction.value
+                }
+    push_notification(dict) 
+   
     tx_id = responseTransaction.referenceCode
 
     # create trip

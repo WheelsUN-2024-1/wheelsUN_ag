@@ -5,7 +5,7 @@ from src.conn.trip_ms import get_trips, get_trip_by_id, create_trip, update_trip
 from src.conn.join_trip import join_trip
 from src.models.trip import Trip, TripInput, TripPassenger, TransactionID, TripPatch
 from strawberry.types import Info
-from src.messaging.new_task import push_notification
+from src.wheelsUN_mq.new_task import push_notification
 
 @strawberry.type
 class TripQuery:

@@ -18,9 +18,9 @@ class Trip:
     route: JSON
     price: int
     vehicleId: int
-    transactionIds: List[int]
+    transactionIds: List[str]
     currentState: int
-    waypoints: List[int]
+    waypoints: List[str]
 
 
 @strawberry.input

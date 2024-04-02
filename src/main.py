@@ -5,8 +5,8 @@ from src.controllers.index import transaction_router
 from src.controllers.index import auth_router
 
 #this is for test purposes---------------------------
-from src.messaging.new_task import push_notification
-from src.messaging.worker import main
+from src.wheelsUN_mq.new_task import push_notification
+from src.wheelsUN_mq.worker import main
 #----------------------------------------------------
 
 import asyncio
