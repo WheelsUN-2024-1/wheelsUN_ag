@@ -59,7 +59,5 @@ class Transaction_Response:
     value : int
     paymentMethods : str
     state : str
-    TransactionIdPay: str
-    orderId:str
     tripId: int
     creditCardId:int

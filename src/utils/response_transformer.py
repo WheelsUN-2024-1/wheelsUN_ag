@@ -160,11 +160,8 @@ def jsonToTransaction(content)->Transaction_Response:
         value=i["value"],
         paymentMethods=i["paymentMethods"],
         state=i["state"],
-        TransactionIdPay=i["transactionIdPay"],
-        orderId=i["orderId"],
         tripId=i["tripId"],
         creditCardId=i["creditCardId"]
-
         )
 
     return transaction
