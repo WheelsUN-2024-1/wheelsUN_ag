@@ -2,8 +2,9 @@
 import requests
 import json
 import strawberry
+from src.models.transactions import Transaction_database
 from src.conn.trip_ms import get_trip_by_id, add_passg_trip
-from src.conn.transaction_ms import get_creditcard_by_id, create_transaction
+from src.conn.transaction_ms import get_creditcard_by_id, create_transaction, create_transaction_database
 from src.conn.users_ms import get_passenger_by_email
 from src.utils.referenceCodeGenerator import generateString
 from src.wheelsUN_mq.new_task import push_notification
@@ -13,10 +14,9 @@ TX_URL = 'https://127.0.0.1:3000'
 
 
 # Example GET request
-def join_trip(tripId,passengerEmail):
+def join_trip(tripId,passengerEmail, creditCardId):
     userId = 456
     vehicleId = 2
-    creditCardId = 1
 
     passengerInfo = get_passenger_by_email(passengerEmail)
     referenceCodeGenerated = generateString()
@@ -119,19 +119,19 @@ def join_trip(tripId,passengerEmail):
 
          "shippingAddress": {
 
-            "street1": "Cr 23 No. 53-50",
+            "street1": passengerInfo.userAddress,
 
             "street2": "5555487",
 
-            "city": "Bogotá",
+            "city": passengerInfo.userCity,
 
             "state": "Bogotá D.C.",
 
             "country": "CO",
 
-            "postalCode": "0000000",
+            "postalCode": passengerInfo.userPostalCode,
 
-            "phone": "7563126"
+            "phone": str(passengerInfo.userPhone)
 
          }
 
@@ -223,7 +223,7 @@ def join_trip(tripId,passengerEmail):
 }
     
     
-
+         
     # create transaction
     responseTransaction = create_transaction(json_tx)
     dict = {"message": "La transaccion ha sido creada", 
@@ -234,8 +234,19 @@ def join_trip(tripId,passengerEmail):
    
     tx_id = responseTransaction.referenceCode
 
-    # create trip
+    transaction = Transaction_database(
+         referenceCode=tx_id,
+         description="Payment test description",
+         value=responseTrip.price,
+         paymentMethods=json_tx["transaction"]["paymentMethod"],
+         state="APPROVED",
+         tripId=tripId,
+         creditCardId=creditCardId
+    )
+    
+    transaction_database = create_transaction_database(transaction)
 
+       # create trip
     json_trip = {
         "transactionId": tx_id,
         "waypoint": "Nuestro Bogotá"

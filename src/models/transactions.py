@@ -17,6 +17,7 @@ class CreditCard_model:
     Name: str
     SecurityCode: str
     ExpirationDate: str
+    Brand:str
 
 @strawberry.type
 class CreditCard_Response:
@@ -30,6 +31,7 @@ class CreditCard_Response:
     name: str
     securityCode: str
     expirationDate: str
+    brand:str
 
 @strawberry.input
 class CreditCard_patch:
@@ -39,6 +41,7 @@ class CreditCard_patch:
     Name: Optional[str] = None
     SecurityCode: Optional[str] = None
     ExpirationDate: Optional[str] = None
+    BranD: Optional[str] = None
 
 @strawberry.input
 class Transaction_model:
@@ -47,6 +50,17 @@ class Transaction_model:
     test : bool
     merchant : JSON
     transaction : JSON
+
+@strawberry.input
+class Transaction_database:
+    ID : int
+    referenceCode : str
+    description : str
+    value : int
+    paymentMethods : str
+    state : str
+    tripId: int
+    creditCardId:int
 
 @strawberry.type
 class Transaction_Response:

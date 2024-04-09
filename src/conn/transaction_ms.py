@@ -53,7 +53,7 @@ def create_transaction(transaction):
     return transaction
 
 def create_transaction_database(transaction):
-    transaction_dict = strawberry.asdict(transaction)
+    transaction_dict = transaction
     response = requests.post(f'{BASE_URL}/transaction/createdata', json= transaction_dict, verify=False)
     transaction = jsonToTransaction(response.content)
     return transaction

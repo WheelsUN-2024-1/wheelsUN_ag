@@ -181,6 +181,7 @@ def jsonToCreditCards(content)->List[CreditCard_Response]:
             name=i["name"],
             securityCode=i["securityCode"],
             expirationDate=i["expirationDate"],
+            brand=i["brand"]
             )
         creditcards.append(creditcard)
     return creditcards
@@ -199,6 +200,7 @@ def jsonToCreditCard(content)->CreditCard_Response:
         name=i["name"],
         securityCode=i["securityCode"],
         expirationDate=i["expirationDate"],
+        brand=i["brand"]
         )
 
     return creditcard
