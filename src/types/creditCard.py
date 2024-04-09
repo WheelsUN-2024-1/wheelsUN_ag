@@ -1,6 +1,6 @@
 import strawberry
 import typing
-from src.conn.transaction_ms import get_creditcard_by_id, create_creditcard, update_creditcard, delete_creditcard
+from src.conn.transaction_ms import get_creditcard_by_id, create_creditcard, update_creditcard, delete_creditcard, get_creditcard_by_user
 from src.models.transactions import CreditCard_model, CreditCard_Response, CreditCard_patch
 from strawberry.types import Info
 
@@ -10,6 +10,10 @@ class CreditCardQuery:
     @strawberry.field
     def creditCardByID(self, info: Info, id:int)->CreditCard_Response:
         return get_creditcard_by_id(id)
+    
+    @strawberry.field
+    def creditCardByUser(self, info: Info, id:int)->typing.List[CreditCard_Response]:
+        return get_creditcard_by_user(id)
     
 @strawberry.type
 class CreditCardMutation :

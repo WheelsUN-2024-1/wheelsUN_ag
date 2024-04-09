@@ -131,7 +131,6 @@ def jsonToTrips(content)->List[Trip]:
         trips.append(trip)
     return trips
 
-
 def jsonToTrip(content)->Trip:
     i = json.loads(content.decode('utf-8'))   
         
@@ -165,6 +164,26 @@ def jsonToTransaction(content)->Transaction_Response:
         )
 
     return transaction
+
+
+def jsonToCreditCards(content)->List[CreditCard_Response]:
+    data = json.loads(content.decode('utf-8'))   
+    creditcards =[]
+    for i in data:
+        creditcard =  CreditCard_Response(
+            ID=i["ID"],
+            CreatedAt=i["CreatedAt"],
+            UpdatedAt=i["UpdatedAt"],
+            DeletedAt=i["DeletedAt"],
+            creditCardId=i["creditCardId"],
+            userId=i["userId"],
+            number=i["number"],
+            name=i["name"],
+            securityCode=i["securityCode"],
+            expirationDate=i["expirationDate"],
+            )
+        creditcards.append(creditcard)
+    return creditcards
 
 def jsonToCreditCard(content)->CreditCard_Response:
     i = json.loads(content.decode('utf-8'))   
