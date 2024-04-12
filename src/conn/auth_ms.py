@@ -4,10 +4,10 @@ import strawberry
 from src.utils.response_transformer import jsonToLogin, jsonToRegister, jsonToLogout
 
 #DEV
-BASE_URL = 'http://127.0.0.1:8080'
+#BASE_URL = 'http://127.0.0.1:8080'
 
 #DOCKER
-#BASE_URL = 'http://wheelsun_user_ms:8080'
+BASE_URL = 'http://wheelsunAuth:8080'
 
 #REGISTER
 
