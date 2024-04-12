@@ -3,7 +3,7 @@ from typing import List
 
 from src.models.users import Driver_model, Passenger_model
 from src.models.vehicle import Vehicle_model
-from src.models.trip import Trip
+from src.models.trip import Trip, Prediction
 from src.models.transactions import Transaction_Response
 from src.models.transactions import CreditCard_Response
 from src.models.auth import RegisterResponse, LoginResponse, LogoutResponse
@@ -233,3 +233,15 @@ def jsonToLogout(content)->LogoutResponse:
         )
 
     return logout
+
+def jsonToPredictions(content)->List[Prediction]:
+    data = json.loads(content.decode('utf-8'))
+    predictions = []
+    print(data)
+    for i in data["predictions"]:
+        print(i)
+        pred =  Prediction(
+            description=i["description"]
+            )
+        predictions.append(pred)
+    return predictions

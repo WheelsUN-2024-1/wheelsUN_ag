@@ -13,6 +13,10 @@ JSON = strawberry.scalar(
 
 
 @strawberry.type
+class Prediction:
+    description: str
+
+@strawberry.type
 class Trip:
     id: str
     route: JSON

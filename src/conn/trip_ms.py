@@ -1,7 +1,7 @@
 import requests
 import json
 import strawberry
-from src.utils.response_transformer import jsonToTrips, jsonToTrip
+from src.utils.response_transformer import jsonToTrips, jsonToTrip, jsonToPredictions
 from src.models.trip import TripPassenger
 
 BASE_URL = 'http://127.0.0.1:3002'
@@ -59,3 +59,7 @@ def delete_trip(id):
     trip = jsonToTrip(response.content)
     return trip
 
+def auto_complete(query):
+    response = requests.get(f'{BASE_URL}/trip/places/{query}')
+    predictions = jsonToPredictions(response.content)
+    return predictions
