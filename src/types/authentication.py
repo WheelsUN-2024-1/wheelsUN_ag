@@ -2,7 +2,7 @@ import strawberry
 import typing
 from src.conn.users_ms import create_driver, create_passenger, get_driver_by_email, get_passenger_by_email
 from src.models.users import Driver_model, Driver_input, Passenger_model, Passenger_input
-from src.models.auth import LoginModel, LoginResponse, RegisterModel, RegisterResponse
+from src.models.auth import LoginModel, LoginResponse, RegisterModel, RegisterResponse, LoginResponseWithUserInfo
 from src.conn.auth_ms import register, login
 from strawberry.types import Info
 
@@ -21,13 +21,17 @@ class AuthenticationMutation:
         return register(registerM)
     
     @strawberry.mutation
-    def driverLogin(self, info, email:str, password:str)->LoginResponse:
+    def driverLogin(self, info, email:str, password:str)->LoginResponseWithUserInfo:
         driver = get_driver_by_email(email)
         loginM = LoginModel(userId=driver.id, password= password)
-        return login(loginM)
+        loginResponse = login(loginM)
+        loginResponseUser = LoginResponseWithUserInfo(message=loginResponse.message, token= loginResponse.token, user=driver)
+        return loginResponseUser
     
     @strawberry.mutation
-    def passengerLogin(self, info, email:str, password:str)->LoginResponse:
+    def passengerLogin(self, info, email:str, password:str)->LoginResponseWithUserInfo:
         passenger = get_passenger_by_email(email)
         loginM = LoginModel(userId=passenger.id, password= password)
-        return login(loginM)
+        loginResponse = login(loginM)
+        loginResponseUser = LoginResponseWithUserInfo(message=loginResponse.message, token= loginResponse.token, user=passenger)
+        return loginResponseUser
