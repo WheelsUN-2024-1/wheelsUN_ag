@@ -51,5 +51,5 @@ class TripMutation:
         return remove_passg_trip(id,tx_id)
     
     @strawberry.mutation
-    def joinTrip(self, info, tripId:str, passengerEmail:str,creditCardId:int)->Trip:
-        return join_trip(tripId, passengerEmail, creditCardId)
+    def joinTrip(self, info, tripId:str, passengerEmail:str,creditCardId:int, stopPoint:str)->Trip:
+        return join_trip(tripId, passengerEmail, creditCardId, stopPoint)

@@ -2,7 +2,7 @@ import requests
 import json
 import strawberry
 from src.utils.response_transformer import jsonToCreditCard, jsonToTransaction, jsonToCreditCards
-from src.models.transactions import Transaction_model, CreditCard_model
+from src.models.transactions import Transaction_model, CreditCard_model, Transaction_database
 
 BASE_URL = 'https://127.0.0.1:3000'
 
@@ -54,7 +54,10 @@ def create_transaction(transaction):
     response = requests.post(f'{BASE_URL}/transaction/create', json=transaction_dict, verify=False)
 
 def create_transaction_database(transaction):
-    transaction_dict = transaction
+    if type(transaction) == Transaction_database:
+        transaction_dict = strawberry.asdict(transaction)
+    else:
+        transaction_dict = transaction
     response = requests.post(f'{BASE_URL}/transaction/createdata', json= transaction_dict, verify=False)
     print(response.content)
     transaction = jsonToTransaction(response.content)

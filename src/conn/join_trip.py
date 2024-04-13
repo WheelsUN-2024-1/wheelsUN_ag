@@ -14,9 +14,7 @@ TX_URL = 'https://127.0.0.1:3000'
 
 
 # Example GET request
-def join_trip(tripId,passengerEmail, creditCardId):
-    userId = 456
-    vehicleId = 2
+def join_trip(tripId,passengerEmail, creditCardId, stopPoint):
 
     passengerInfo = get_passenger_by_email(passengerEmail)
     referenceCodeGenerated = generateString()
@@ -249,7 +247,7 @@ def join_trip(tripId,passengerEmail, creditCardId):
        # create trip
     json_trip = {
         "transactionId": tx_id,
-        "waypoint": "Nuestro Bogotá"
+        "waypoint": stopPoint
     }
 
     
