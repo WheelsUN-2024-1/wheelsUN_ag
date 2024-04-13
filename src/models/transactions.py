@@ -53,7 +53,6 @@ class Transaction_model:
 
 @strawberry.input
 class Transaction_database:
-    ID : int
     referenceCode : str
     description : str
     value : int

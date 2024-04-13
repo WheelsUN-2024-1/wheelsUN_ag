@@ -95,7 +95,7 @@ def join_trip(tripId,passengerEmail, creditCardId):
 
             "contactPhone": passengerInfo.userPhone,
 
-            "dniNumber": passengerInfo.userIdNumber,
+            "dniNumber": str(passengerInfo.userIdNumber),
 
             "shippingAddress": {
 
@@ -227,12 +227,12 @@ def join_trip(tripId,passengerEmail, creditCardId):
     # create transaction
     responseTransaction = create_transaction(json_tx)
     dict = {"message": "La transaccion ha sido creada", 
-                "referenceCode":responseTransaction.referenceCode,
-                "price": responseTransaction.value
+                "referenceCode":referenceCodeGenerated,
+                "price": responseTrip.price
                 }
     push_notification(dict) 
    
-    tx_id = responseTransaction.referenceCode
+    tx_id = referenceCodeGenerated
 
     transaction = Transaction_database(
          referenceCode=tx_id,

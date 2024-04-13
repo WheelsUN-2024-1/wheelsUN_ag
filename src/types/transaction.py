@@ -18,5 +18,5 @@ class TransactionMutation:
         return create_transaction(transaction)
     
     @strawberry.mutation
-    def createTransactionDatabase(self, info: Info, transaction: Transaction_database)->Transaction_Response:
+    def createTransactionDatabase(self, info: Info, transaction: Transaction_database)->None:
         return create_transaction_database(transaction)
