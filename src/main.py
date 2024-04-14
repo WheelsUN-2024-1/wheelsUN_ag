@@ -3,6 +3,7 @@ from src.controllers.index import users_router
 from src.controllers.index import trip_router
 from src.controllers.index import transaction_router
 from src.controllers.index import auth_router
+from fastapi.middleware.cors import CORSMiddleware
 
 #this is for test purposes---------------------------
 from src.wheelsUN_mq.new_task import push_notification
@@ -19,6 +20,18 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
+
+origins = [
+    "http://localhost:9200",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(users_router)
 app.include_router(trip_router)
