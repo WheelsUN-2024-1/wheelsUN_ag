@@ -12,7 +12,7 @@ JSON = strawberry.scalar(
 @strawberry.input
 class CreditCard_model:
     CreditCardId: int
-    UserId: int
+    UserId: str
     Number: str
     Name: str
     SecurityCode: str
@@ -26,7 +26,7 @@ class CreditCard_Response:
     UpdatedAt: str
     DeletedAt: str
     creditCardId: int
-    userId: int
+    userId: str
     number: str
     name: str
     securityCode: str

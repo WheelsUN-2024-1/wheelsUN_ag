@@ -12,7 +12,7 @@ def create_card(id, creditcard):
     userInfo = get_passenger_by_id(id)
     creditcardPost = {
         "CreditCardId": creditcard.CreditCardId,
-        "UserId": userInfo.userIdNumber,
+        "UserId": id,
         "Number": creditcard.Number,
         "Name": userInfo.userName,
         "SecurityCode": creditcard.SecurityCode,
