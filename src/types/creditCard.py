@@ -19,7 +19,7 @@ class CreditCardQuery:
 @strawberry.type
 class CreditCardMutation :
     @strawberry.mutation
-    def createCreditCard(self, info: Info, id:str, creditcard:CreditCard_model)->CreditCard_Response:        
+    def createCreditCard(self, info: Info, id:int, creditcard:CreditCard_model)->CreditCard_Response:        
         return create_card(id,creditcard)
     
     @strawberry.mutation
