@@ -127,6 +127,9 @@ def jsonToTrips(content)->List[Trip]:
             vehicleId=i["vehicleId"],
             transactionIds=i["transactionIds"],
             currentState=i["currentState"],
+            waypoints=i["waypoints"],
+            startingPoint=i["startingPoint"],
+            endingPoint=i["endingPoint"]
             )
         trips.append(trip)
     return trips
@@ -141,7 +144,9 @@ def jsonToTrip(content)->Trip:
         vehicleId=i["vehicleId"],
         transactionIds=i["transactionIds"],
         currentState=i["currentState"],
-        waypoints=i["waypoints"]
+        waypoints=i["waypoints"],
+        startingPoint=i["startingPoint"],
+        endingPoint=i["endingPoint"]
         )
 
     return trip

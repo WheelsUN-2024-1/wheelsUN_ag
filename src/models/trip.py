@@ -25,6 +25,8 @@ class Trip:
     transactionIds: List[str]
     currentState: int
     waypoints: List[str]
+    startingPoint: str
+    endingPoint: str
 
 
 @strawberry.input

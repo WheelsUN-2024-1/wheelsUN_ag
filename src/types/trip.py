@@ -10,7 +10,7 @@ from src.wheelsUN_mq.new_task import push_notification
 @strawberry.type
 class TripQuery:
     @strawberry.field
-    def allTrips(self, info: Info)->typing.List[Trip]:
+    def allTrips(self)->typing.List[Trip]:
         return get_trips()
    
     @strawberry.field
