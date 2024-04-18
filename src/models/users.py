@@ -7,7 +7,7 @@ class Passenger_model:
     userName: str
     userAge: int
     userEmail: str
-    userPhone: int
+    userPhone: str
     userAddress: str
     userCity: str
     userCountry: str
@@ -23,7 +23,7 @@ class Passenger_input:
     userName: str
     userAge: int
     userEmail: str
-    userPhone: int
+    userPhone: str
     userAddress: str
     userCity: str
     userCountry: str
@@ -38,7 +38,7 @@ class Passenger_patch:
     userName: Optional[str] = None
     userAge: Optional[int] = None
     userEmail: Optional[str] = None
-    userPhone: Optional[int] = None
+    userPhone: Optional[str] = None
     userAddress: Optional[str] = None
     userCity: Optional[str] = None
     userCountry: Optional[str] = None
