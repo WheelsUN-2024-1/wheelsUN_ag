@@ -1,10 +1,19 @@
 #!/usr/bin/env python
 import pika
 import json  # Import json module for serialization
+import os
+
+def is_running_in_docker():
+    return os.path.exists('/.dockerenv')
 
 def push_notification(message_dict):
+    # Set base URL based on environment
+    if is_running_in_docker():
+        RMQ_HOST = 'wheelsun_mq'
+    else:
+        RMQ_HOST = 'localhost'
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='localhost'))
+        pika.ConnectionParameters(host=RMQ_HOST))
     channel = connection.channel()
 
     channel.queue_declare(queue='notification_queue', durable=True)
