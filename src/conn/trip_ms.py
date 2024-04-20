@@ -1,7 +1,7 @@
 import requests
 import json
 import strawberry
-from src.utils.response_transformer import jsonToTrips, jsonToTrip, jsonToPredictions
+from src.utils.response_transformer import jsonToTrips, jsonToTrip, jsonToPredictions,jsonToCoordinates
 from src.models.trip import TripPassenger
 import os
 
@@ -72,3 +72,9 @@ def auto_complete(query):
     response = requests.get(f'{BASE_URL}/trip/places/{query}')
     predictions = jsonToPredictions(response.content)
     return predictions
+
+
+def coordinates(place_id):
+    response = requests.get(f'{BASE_URL}/trip/coord/{place_id}')
+    coordinates = jsonToCoordinates(response.content)
+    return coordinates

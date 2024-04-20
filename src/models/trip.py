@@ -13,8 +13,14 @@ JSON = strawberry.scalar(
 
 
 @strawberry.type
+class Coordinates:
+    lat: float
+    lng: float
+
+@strawberry.type
 class Prediction:
     description: str
+    place_id: str
 
 @strawberry.type
 class Trip:

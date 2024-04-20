@@ -3,7 +3,7 @@ from typing import List
 
 from src.models.users import Driver_model, Passenger_model
 from src.models.vehicle import Vehicle_model
-from src.models.trip import Trip, Prediction
+from src.models.trip import Trip, Prediction, Coordinates
 from src.models.transactions import Transaction_Response
 from src.models.transactions import CreditCard_Response
 from src.models.auth import RegisterResponse, LoginResponse, LogoutResponse
@@ -246,7 +246,17 @@ def jsonToPredictions(content)->List[Prediction]:
     for i in data["predictions"]:
         print(i)
         pred =  Prediction(
-            description=i["description"]
+            description=i["description"],
+            place_id=i["place_id"]
             )
         predictions.append(pred)
     return predictions
+
+
+def jsonToCoordinates(content)->Prediction:
+    i = json.loads(content.decode('utf-8'))
+    coord =  Coordinates(
+        lat=i["lat"],
+        lng=i["lng"]
+        )
+    return coord

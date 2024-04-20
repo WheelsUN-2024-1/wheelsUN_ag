@@ -1,9 +1,9 @@
 import strawberry
 import typing 
 from typing import Optional
-from src.conn.trip_ms import auto_complete, get_trips, get_trip_by_id, create_trip, update_trip, add_passg_trip, remove_passg_trip, delete_trip
+from src.conn.trip_ms import coordinates, auto_complete, get_trips, get_trip_by_id, create_trip, update_trip, add_passg_trip, remove_passg_trip, delete_trip
 from src.conn.join_trip import join_trip
-from src.models.trip import Trip, TripInput, TripPassenger, TransactionID, TripPatch, Prediction
+from src.models.trip import Trip, TripInput, TripPassenger, TransactionID, TripPatch, Prediction, Coordinates
 from strawberry.types import Info
 from src.wheelsUN_mq.new_task import push_notification
 
@@ -20,6 +20,11 @@ class TripQuery:
     @strawberry.field
     def autoComplete(self, query:str)->typing.List[Prediction]:
         return auto_complete(query)
+    
+    @strawberry.field
+    def getCoordinates(self, place_id:str)->Coordinates:
+        return coordinates(place_id)
+    
 
 
 
