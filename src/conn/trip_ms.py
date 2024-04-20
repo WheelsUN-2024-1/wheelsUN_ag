@@ -3,8 +3,17 @@ import json
 import strawberry
 from src.utils.response_transformer import jsonToTrips, jsonToTrip, jsonToPredictions
 from src.models.trip import TripPassenger
+import os
 
-BASE_URL = 'http://127.0.0.1:3002'
+# Check if running in a Docker container
+def is_running_in_docker():
+    return os.path.exists('/.dockerenv')
+
+# Set base URL based on environment
+if is_running_in_docker():
+    BASE_URL = 'http://wheelsun_trip_ms:3002'
+else:
+    BASE_URL = 'http://127.0.0.1:3002'
 
 # Example GET request
 def get_trips():

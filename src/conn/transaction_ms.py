@@ -3,8 +3,17 @@ import json
 import strawberry
 from src.utils.response_transformer import jsonToCreditCard, jsonToTransaction, jsonToCreditCards
 from src.models.transactions import Transaction_model, CreditCard_model, Transaction_database
+import os
 
-BASE_URL = 'https://127.0.0.1:3000'
+# Check if running in a Docker container
+def is_running_in_docker():
+    return os.path.exists('/.dockerenv')
+
+# Set base URL based on environment
+if is_running_in_docker():
+    BASE_URL = 'http://wheelsun_transaction_ms:3000'
+else:
+    BASE_URL = 'http://127.0.0.1:3000'
 
 #CREDITCARD
 def get_creditcard_by_id(id):
