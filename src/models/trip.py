@@ -21,7 +21,7 @@ class Trip:
     id: str
     route: JSON
     price: int
-    vehicleId: int
+    vehicleId: str
     transactionIds: List[str]
     currentState: int
     waypoints: List[str]
@@ -34,7 +34,7 @@ class TripInput:
     startingPoint: str
     endingPoint: str
     price: int
-    vehicleId: int
+    vehicleId: str
     currentState: int
 
 @strawberry.input
@@ -50,7 +50,7 @@ class TransactionID:
 @strawberry.input
 class TripPatch:
     price: Optional[int] = None
-    vehicleId: Optional[int] = None
+    vehicleId: Optional[str] = None
     currentState: Optional[int] = None
     
     
