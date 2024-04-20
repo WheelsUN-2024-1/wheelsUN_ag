@@ -9,8 +9,8 @@ from src.conn.users_ms import get_passenger_by_email
 from src.utils.referenceCodeGenerator import generateString
 from src.wheelsUN_mq.new_task import push_notification
 
-TRIP_URL = 'http://127.0.0.1:3002'
-TX_URL = 'https://127.0.0.1:3000'
+#TRIP_URL = 'http://127.0.0.1:3002'
+#TX_URL = 'https://127.0.0.1:3000'
 
 
 # Example GET request

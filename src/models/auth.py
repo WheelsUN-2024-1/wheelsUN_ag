@@ -1,5 +1,5 @@
 import strawberry
-from typing import Optional
+from typing import Optional, Union
 from src.models.users import Driver_model, Passenger_model
 @strawberry.input
 class RegisterModel:
@@ -23,8 +23,12 @@ class LoginResponse:
    message: str
 
 @strawberry.type
-class LoginResponseWithUserInfo(LoginResponse):
-   user:Driver_model | Passenger_model
+class LoginResponseWithDriver(LoginResponse):
+   driver:Driver_model
+
+@strawberry.type
+class LoginResponseWithPassenger(LoginResponse):
+   passenger: Passenger_model
 
 @strawberry.type
 class LogoutResponse:
