@@ -11,9 +11,9 @@ def is_running_in_docker():
 
 # Set base URL based on environment
 if is_running_in_docker():
-    BASE_URL = 'http://wheelsun_transaction_ms:3000'
+    BASE_URL = 'https://wheelsun_transaction_ms:3000'
 else:
-    BASE_URL = 'http://127.0.0.1:3000'
+    BASE_URL = 'https://127.0.0.1:3000'
 
 #CREDITCARD
 def get_creditcard_by_id(id):
