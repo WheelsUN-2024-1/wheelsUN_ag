@@ -4,16 +4,17 @@ import strawberry
 import os
 from src.utils.response_transformer import jsonToLogin, jsonToRegister, jsonToLogout
 
-# Check if running in a Docker container
+""" # Check if running in a Docker container
 def is_running_in_docker():
     return os.path.exists('/.dockerenv')
 
 # Set base URL based on environment
 if is_running_in_docker():
-    BASE_URL = 'http://wheelsunAuth:8080'
+    BASE_URL = 'http://wheelsunauth:8080'
 else:
-    BASE_URL = 'http://127.0.0.1:8080'
+    BASE_URL = 'http://127.0.0.1:8080' """
 
+BASE_URL = 'http://wheelsunauth:8080'
 #REGISTER
 
 def register(register):

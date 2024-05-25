@@ -8,10 +8,12 @@ def is_running_in_docker():
 
 def push_notification(message_dict):
     # Set base URL based on environment
-    if is_running_in_docker():
-        RMQ_HOST = 'wheelsun_mq'
+    """ if is_running_in_docker():
+        RMQ_HOST = 'wheelsunmq'
     else:
-        RMQ_HOST = 'localhost'
+        RMQ_HOST = 'localhost' """
+
+    RMQ_HOST = 'wheelsunmq'
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=RMQ_HOST))
     channel = connection.channel()

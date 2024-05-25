@@ -3,16 +3,18 @@ import strawberry
 import os
 from src.utils.response_transformer import jsonToDrivers, jsonToDriver, jsonToPassengers, jsonToPassenger, jsonToString, jsonToVehicles, jsonToVehicle
 
-# Check if running in a Docker container
+""" # Check if running in a Docker container
 def is_running_in_docker():
     return os.path.exists('/.dockerenv')
 
 # Set base URL based on environment
 if is_running_in_docker():
-    BASE_URL = 'http://wheelsun_user_ms:8000'
+    BASE_URL = 'http://wheelsunuserms:8000'
 else:
-    BASE_URL = 'http://127.0.0.1:8000'
-    
+    BASE_URL = 'http://127.0.0.1:8000' """
+
+BASE_URL = 'http://wheelsunuserms:8000'
+
 ##DRIVER
 def get_drivers():
     response = requests.get(f'{BASE_URL}/driver')
