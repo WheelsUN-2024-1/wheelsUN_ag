@@ -1,7 +1,7 @@
 from ldap3 import Server, Connection, SIMPLE, SYNC, SUBTREE
 import os
 
-# Check if running in a Docker container
+""" # Check if running in a Docker container
 def is_running_in_docker():
     return os.path.exists('/.dockerenv')
 
@@ -10,8 +10,9 @@ def is_running_in_docker():
 if is_running_in_docker():
     ldap_server = 'wheelsun_ldap'
 else:
-    ldap_server = 'localhost'
+    ldap_server = 'localhost' """
 
+ldap_server = '104.198.171.22'
 ldap_port = 389  # Default LDAP port
 
 # LDAP admin credentials and base DN

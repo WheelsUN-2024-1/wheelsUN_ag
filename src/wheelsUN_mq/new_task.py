@@ -13,7 +13,7 @@ def push_notification(message_dict):
     else:
         RMQ_HOST = 'localhost' """
 
-    RMQ_HOST = 'wheelsunmq'
+    RMQ_HOST = '34.41.172.204'
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=RMQ_HOST))
     channel = connection.channel()
